@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="is">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DV Efnisblokkari - Fáðu betri upplifun á dv.is</title>
+    <meta name="description" content="Firefox og Chrome viðbót til að fela óskylt efni á dv.is. Feldu 433 íþróttir, Fókus, Eyju, Kynningar og auglýsingar með einum smelli.">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <img src="../icon.png" alt="DV Efnisblokkari logo" class="logo">
+                <h1>DV Efnisblokkari</h1>
+                <p class="tagline">Fáðu betri upplifun á dv.is með því að fela óskylt efni</p>
+                <div class="cta-buttons">
+                    <a href="#download" class="btn btn-primary">Sækja viðbót</a>
+                    <a href="#features" class="btn btn-secondary">Skoða eiginleika</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section id="features" class="features">
+        <div class="container">
+            <h2>Eiginleikar</h2>
+            <div class="features-grid">
+                <div class="feature">
+                    <div class="feature-icon">⚽</div>
+                    <h3>433 Íþróttir</h3>
+                    <p>Feldu allt íþróttaefni með grænum blokka og "Íþróttefni falið" texta</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">🎭</div>
+                    <h3>Fókus</h3>
+                    <p>Feldu Fókus efni með fjólubláum blokka og "Fókus efni falið" texta</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">🏝️</div>
+                    <h3>Eyjan</h3>
+                    <p>Feldu Eyjan efni með rauðum blokka og "Eyjan efni falið" texta</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">📢</div>
+                    <h3>Kynningar</h3>
+                    <p>Feldu kynningarefni með appelsínugulum blokka og "Kynning efni falið" texta</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">🚫</div>
+                    <h3>Auglýsingar</h3>
+                    <p>Feldu allar auglýsingar með hvítum blokka án texta</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">⚙️</div>
+                    <h3>Einföld stjórnun</h3>
+                    <p>Kveiktu eða slökktu á hverjum flokki fyrir sig eða allt efni í einu</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="download" class="download">
+        <div class="container">
+            <h2>Sækja viðbótina</h2>
+            <div class="download-options">
+                <div class="browser-option">
+                    <div class="browser-icon firefox">🦊</div>
+                    <h3>Firefox</h3>
+                    <p>Fyrir Firefox 60+ með Manifest V2</p>
+                    <a href="https://github.com/biggihs/dv-efnisblokkari/raw/main/build/dv-content-blocker-firefox.zip" class="btn btn-primary" download>
+                        Sækja fyrir Firefox
+                    </a>
+                    <p class="install-note">
+                        <strong>Uppsetning:</strong> Sæktu skrána, farðu í about:debugging → This Firefox → Load Temporary Add-on → Veldu manifest.json úr ZIP skránni
+                    </p>
+                </div>
+                <div class="browser-option">
+                    <div class="browser-icon chrome">🌐</div>
+                    <h3>Chrome</h3>
+                    <p>Fyrir Chrome með Manifest V3</p>
+                    <a href="https://github.com/biggihs/dv-efnisblokkari/raw/main/build/dv-content-blocker-chrome.zip" class="btn btn-primary" download>
+                        Sækja fyrir Chrome
+                    </a>
+                    <p class="install-note">
+                        <strong>Uppsetning:</strong> Sæktu skrána, farðu í chrome://extensions → Developer mode ON → Load unpacked → Veldu möppuna úr ZIP skránni
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="how-it-works">
+        <div class="container">
+            <h2>Hvernig virkar þetta?</h2>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3>Settu upp</h3>
+                    <p>Sæktu og settu upp viðbótina í vafrann þinn</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3>Farðu á dv.is</h3>
+                    <p>Viðbótin virkar aðeins á www.dv.is og greiningarsíðum þeirra</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3>Stilltu efnisflokka</h3>
+                    <p>Smelltu á viðbótartákn í tækjastikunni til að stilla hvað á að fela</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <h3>Njóttu betri upplifunar</h3>
+                    <p>Óskylt efni er fólgið með litaðar blokka sem sýna hvað var falið</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="privacy">
+        <div class="container">
+            <h2>Persónuvernd og öryggi</h2>
+            <div class="privacy-grid">
+                <div class="privacy-item">
+                    <h3>🔒 Engin gögn send</h3>
+                    <p>Öll vinnsla fer fram í vafranum þínum. Engin gögn eru send til utanaðkomandi þjóna.</p>
+                </div>
+                <div class="privacy-item">
+                    <h3>🏠 Aðeins dv.is</h3>
+                    <p>Viðbótin hefur aðeins aðgang að www.dv.is og virkar ekki á öðrum vefsíðum.</p>
+                </div>
+                <div class="privacy-item">
+                    <h3>🔓 Opinn kóði</h3>
+                    <p>Allur kóði er opinn og aðgengilegur á GitHub til skoðunar.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 DV Efnisblokkari. Opinn hugbúnaður undir MIT leyfi.</p>
+            <p>
+                <a href="https://github.com/biggihs/dv-efnisblokkari">GitHub</a> • 
+                <a href="https://github.com/biggihs/dv-efnisblokkari/issues">Tilkynna villu</a> • 
+                <a href="#contact">Hafa samband</a>
+            </p>
+        </div>
+    </footer>
+</body>
+</html>
