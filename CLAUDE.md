@@ -56,8 +56,15 @@ const keyMap = {
 No specific build process required - load as temporary extension in Firefox.
 
 ## Browser Compatibility
-Firefox 60+ (Manifest V2)
-Runs only on www.dv.is domain
+- **Firefox**: Manifest V2, uses `browser` API namespace
+- **Chrome**: Manifest V3, uses `chrome` API namespace, service worker background
+- Cross-browser compatibility layer: `const browserAPI = typeof browser !== 'undefined' ? browser : chrome;`
+- Runs only on www.dv.is domain
+
+## Build System
+- `./build.sh` - Creates separate packages for Firefox and Chrome
+- `manifest.json` + `background.js` - Firefox version (Manifest V2)
+- `manifest-chrome.json` + `background-chrome.js` - Chrome version (Manifest V3)
 
 ## User Experience Notes
 - All blocking enabled by default

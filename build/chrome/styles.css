@@ -1,0 +1,59 @@
+/* DV Content Blocker - Styles */
+
+.content-blocked-indicator, .sports-blocked-indicator {
+    color: white !important;
+    font-weight: bold !important;
+    text-align: center !important;
+    font-size: 14px !important;
+    background: rgba(0,0,0,0.7) !important;
+    padding: 8px !important;
+    border-radius: 4px !important;
+    font-family: Arial, sans-serif !important;
+    z-index: 10 !important;
+    position: relative !important;
+    max-width: 90% !important;
+    word-break: break-word !important;
+    box-sizing: border-box !important;
+}
+
+/* Ensure blocked figures respect original dimensions */
+figure[style*="background-color: #28a745"],
+figure[style*="background-color: #6B287F"], 
+figure[style*="background-color: #e74c3c"],
+figure[style*="background-color: #f39c12"] {
+    background-image: none !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    box-sizing: border-box !important;
+    overflow: hidden !important;
+}
+
+/* Special styling for blocked ads */
+[style*="background-color: white"] {
+    background-color: white !important;
+}
+
+/* Prevent content from expanding beyond intended size */
+figure[style*="background-color"] {
+    flex-shrink: 0 !important;
+}
+
+/* Legacy support for old class names */
+figure.sports-blocked {
+    background-image: none !important;
+    background-color: #28a745 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    box-sizing: border-box !important;
+}
+
+/* Ensure the blocked indicator is visible and properly sized */
+.content-blocked-indicator,
+.sports-blocked-indicator {
+    display: block !important;
+    visibility: visible !important;
+    flex-shrink: 1 !important;
+    min-width: 0 !important;
+}

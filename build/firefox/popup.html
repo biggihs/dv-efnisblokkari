@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <style>
+        body {
+            width: 250px;
+            padding: 15px;
+            font-family: Arial, sans-serif;
+            margin: 0;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 15px;
+        }
+        
+        .header h2 {
+            margin: 0;
+            font-size: 16px;
+            color: #333;
+        }
+        
+        .toggle-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+        
+        .content-section {
+            border-top: 1px solid #eee;
+            padding-top: 10px;
+            margin-top: 10px;
+        }
+        
+        .section-title {
+            font-size: 13px;
+            font-weight: bold;
+            color: #555;
+            margin-bottom: 8px;
+        }
+        
+        .toggle-label {
+            font-size: 13px;
+            color: #333;
+        }
+        
+        .content-type-label {
+            font-size: 12px;
+            color: #666;
+            margin-left: 5px;
+        }
+        
+        .toggle-switch {
+            position: relative;
+            width: 50px;
+            height: 24px;
+            background-color: #ccc;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .toggle-switch.active {
+            background-color: #28a745;
+        }
+        
+        .toggle-switch.fokus.active {
+            background-color: #6B287F;
+        }
+        
+        .toggle-switch.eyjan.active {
+            background-color: #e74c3c;
+        }
+        
+        .toggle-switch.kynning.active {
+            background-color: #f39c12;
+        }
+        
+        .toggle-switch.ads.active {
+            background-color: #333;
+            border: 1px solid white;
+        }
+        
+        .toggle-slider {
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            width: 20px;
+            height: 20px;
+            background-color: white;
+            border-radius: 50%;
+            transition: transform 0.3s;
+        }
+        
+        .toggle-switch.active .toggle-slider {
+            transform: translateX(26px);
+        }
+        
+        .status-text {
+            font-size: 12px;
+            color: #666;
+            text-align: center;
+            margin-top: 10px;
+        }
+        
+        .status-active {
+            color: #28a745;
+        }
+        
+        .status-inactive {
+            color: #dc3545;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h2>DV Content Blocker</h2>
+    </div>
+    
+    <div class="toggle-container">
+        <span class="toggle-label">⚽ 433 Sports</span>
+        <div class="toggle-switch" id="toggle433">
+            <div class="toggle-slider"></div>
+        </div>
+    </div>
+    
+    <div class="toggle-container">
+        <span class="toggle-label">🎭 Fókus</span>
+        <div class="toggle-switch fokus" id="toggleFokus">
+            <div class="toggle-slider"></div>
+        </div>
+    </div>
+    
+    <div class="toggle-container">
+        <span class="toggle-label">🏝️ Eyjan</span>
+        <div class="toggle-switch eyjan" id="toggleEyjan">
+            <div class="toggle-slider"></div>
+        </div>
+    </div>
+    
+    <div class="toggle-container">
+        <span class="toggle-label">📢 Kynning</span>
+        <div class="toggle-switch kynning" id="toggleKynning">
+            <div class="toggle-slider"></div>
+        </div>
+    </div>
+    
+    <div class="toggle-container">
+        <span class="toggle-label">🚫 Auglýsingar</span>
+        <div class="toggle-switch ads" id="toggleAds">
+            <div class="toggle-slider"></div>
+        </div>
+    </div>
+    
+    <div class="content-section">
+        <div class="toggle-container">
+            <span class="toggle-label">Block all content</span>
+            <div class="toggle-switch" id="toggleAll">
+                <div class="toggle-slider"></div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="status-text" id="statusText">
+        Loading...
+    </div>
+
+    <script src="popup.js"></script>
+</body>
+</html>

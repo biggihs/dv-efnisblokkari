@@ -1,0 +1,44 @@
+{
+  "manifest_version": 3,
+  "name": "DV Content Blocker",
+  "version": "2.0.0",
+  "description": "Blocks content from 433 sports, Fókus, Eyjan, Kynning, and advertisements on dv.is with colored blocks",
+  
+  "permissions": [
+    "storage",
+    "tabs"
+  ],
+  
+  "host_permissions": [
+    "https://www.dv.is/*"
+  ],
+
+  "icons": {
+    "16": "icon.png",
+    "32": "icon.png",
+    "48": "icon.png",
+    "128": "icon.png"
+  },
+
+  "action": {
+    "default_title": "DV Content Blocker",
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "icon.png",
+      "32": "icon.png"
+    }
+  },
+
+  "background": {
+    "service_worker": "background.js"
+  },
+
+  "content_scripts": [
+    {
+      "matches": ["https://www.dv.is/*"],
+      "js": ["content.js"],
+      "css": ["styles.css"],
+      "run_at": "document_end"
+    }
+  ]
+}

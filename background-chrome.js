@@ -1,4 +1,4 @@
-// Background script for DV Content Blocker
+// Background script for DV Content Blocker (Chrome Service Worker)
 // Cross-browser compatibility layer
 const browserAPI = typeof browser !== 'undefined' ? browser : chrome;
 
@@ -20,6 +20,7 @@ async function setDefaults() {
     }
 }
 
+// Service worker event listeners
 browserAPI.runtime.onInstalled.addListener(() => {
     setDefaults();
 });
@@ -29,7 +30,7 @@ browserAPI.runtime.onStartup.addListener(() => {
 });
 
 // Listen for messages from popup and content scripts
-browserAPI.runtime.onMessage.addListener(async function(request, sender, sendResponse) {
+browserAPI.runtime.onMessage.addListener(async (request, sender, sendResponse) => {
     if (request.action === 'getState') {
         try {
             const result = await browserAPI.storage.sync.get(['block433', 'blockFokus', 'blockEyjan', 'blockKynning', 'blockAds']);
