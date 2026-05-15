@@ -1,8 +1,8 @@
 {
   "manifest_version": 2,
-  "name": "DV Content Blocker",
+  "name": "DV Efnisblokkari",
   "version": "2.0.0",
-  "description": "Blocks content from 433 sports, Fókus, Eyjan, Kynning, and advertisements on dv.is with colored blocks",
+  "description": "Felur efni frá 433 íþróttum, Fókus, Eyju, Kynningum og auglýsingum á dv.is með litaðar útilokun",
   
   "applications": {
     "gecko": {
@@ -22,7 +22,7 @@
   },
 
   "browser_action": {
-    "default_title": "DV Content Blocker",
+    "default_title": "DV Efnisblokkari",
     "default_popup": "popup.html",
     "default_icon": {
       "16": "icon.png",

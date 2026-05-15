@@ -1,4 +1,4 @@
-// Popup script for DV Content Blocker
+// Popup script for DV Efnisblokkari
 // Cross-browser compatibility layer
 const browserAPI = typeof browser !== 'undefined' ? browser : chrome;
 
@@ -42,7 +42,7 @@ document.addEventListener('DOMContentLoaded', async function() {
             blockAds: true
         };
         updateUI(defaultSettings);
-        statusText.textContent = 'Using default settings';
+        statusText.textContent = 'Notar sjálfgefnar stillingar';
     }
 
     // Handle individual toggle clicks
@@ -157,17 +157,17 @@ document.addEventListener('DOMContentLoaded', async function() {
         if (settings.block433) blockedTypes.push('433');
         if (settings.blockFokus) blockedTypes.push('Fókus');
         if (settings.blockEyjan) blockedTypes.push('Eyjan');
-        if (settings.blockKynning) blockedTypes.push('Kynning');
+        if (settings.blockKynning) blockedTypes.push('Kynningar');
         if (settings.blockAds) blockedTypes.push('Auglýsingar');
         
         if (blockedTypes.length === 0) {
-            statusText.textContent = 'All content visible';
+            statusText.textContent = 'Allt efni sýnilegt';
             statusText.className = 'status-text status-inactive';
         } else if (blockedTypes.length === 5) {
-            statusText.textContent = 'All content types blocked';
+            statusText.textContent = 'Allar efnistegundir felaðar';
             statusText.className = 'status-text status-active';
         } else {
-            statusText.textContent = `Blocking: ${blockedTypes.join(', ')}`;
+            statusText.textContent = `Fel: ${blockedTypes.join(', ')}`;
             statusText.className = 'status-text status-active';
         }
     }

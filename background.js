@@ -1,4 +1,4 @@
-// Background script for DV Content Blocker
+// Background script for DV Efnisblokkari
 // Cross-browser compatibility layer
 const browserAPI = typeof browser !== 'undefined' ? browser : chrome;
 

@@ -1,6 +1,8 @@
-// DV 433 Sports Blocker - Content Script
+// DV Efnisblokkari - Content Script
 // Cross-browser compatibility layer
 const browserAPI = typeof browser !== 'undefined' ? browser : chrome;
+
+console.log('DV Efnisblokkari: Viðbót hlaðin og fylgist með 433, Fókus, Eyju, Kynningar og auglýsingaefni');
 
 (function() {
     'use strict';
@@ -473,5 +475,4 @@ const browserAPI = typeof browser !== 'undefined' ? browser : chrome;
         if (anyEnabled) processImages();
     });
 
-    console.log('DV Content Blocker: Extension loaded and monitoring for 433, Fókus, Eyjan, Kynning, and Ad content');
 })();
