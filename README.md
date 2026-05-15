@@ -12,10 +12,12 @@ Firefox og Chrome viðbót til að fela óskylt efni á dv.is með litaðar blok
 
 ## Skjáskot
 
-![Viðbótarstjórnborð](./Popup%20example.png)
+<img src="./Popup%20example.png" alt="Viðbótarstjórnborð með íslenskum texta" width="400">
+
 *Popup viðmót með íslenskum texta og víxlum fyrir hvern efnisflokk*
 
-![Dæmi um virkni](./Screenshot%20Example.png)
+<img src="./Screenshot%20Example.png" alt="DV síða með feldum efni" width="800">
+
 *DV síða með feldum efni - litaðar blokka sýna hvað var falið*
 
 ## Hvað gerir þetta?
