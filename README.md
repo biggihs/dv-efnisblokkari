@@ -6,7 +6,7 @@ Firefox og Chrome viðbót til að fela óskylt efni á dv.is með litaðar blok
 
 > "Ég hef lengi verið þreyttur á að skoða fréttir á DV og smella óvart á 433 "íþróttafréttir" eða auglýsingar. Svo ég lét Claude búa til þetta plugin fyrir Chrome og Firefox sem felur það efni sem ég hef ekki áhuga á. Ég hef ekki lesið neitt af kóðanum, hvorki þessa síðu né plugginið sjálft. ... brave new world :)"
 > 
-> — biggihs
+> — Birgir Hrafn Sigurðsson
 
 **⚠️ Mikilvæg athugasemd**: Þessi viðbót var að öllu leyti búin til af Claude AI (gervigreind). Höfundurinn hefur ekki skoðað eða staðfest kóðann. Notaðu á eigin ábyrgð og traust.
 
