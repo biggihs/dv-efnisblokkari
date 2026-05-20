@@ -5,34 +5,30 @@ Firefox extension for dv.is that replaces content images from specific categorie
 
 ## Content Types & Styling
 - **433 Sports** (⚽): Green blocks (#28a745) - "Íþróttefni falið"
-- **Fókus** (🎭): Purple blocks (#6B287F) - "Fókus efni falið" 
+- **Fókus** (🎭): Purple blocks (#6B287F) - "Fókus efni falið"
 - **Eyjan** (🏝️): Red blocks (#e74c3c) - "Eyjan efni falið"
 - **Kynning** (📢): Orange blocks (#f39c12) - "Kynning efni falið"
-- **Advertisements** (🚫): Plain white blocks (no text, no border)
 
 ## Key Technical Details
 
 ### Content Detection
 - **CSS Classes**: `.f_433`, `.f_fokus`, `.f_eyjan`, `.f_lifsstill`, `.enskiboltinn`, `.kynning`
-- **Ad Selectors**: `.adbox`, `.adboxid`, `.auglysing_ticker`, `[data-zone*="adzone"]`, `[class*="ad_"]`
 - **URL Pattern Matching**: For slider content type detection
 
 ### Storage Keys
 Uses browser.storage.sync with keys:
 - `block433` (boolean)
-- `blockFokus` (boolean) 
+- `blockFokus` (boolean)
 - `blockEyjan` (boolean)
 - `blockKynning` (boolean)
-- `blockAds` (boolean)
 
 **CRITICAL**: Storage key mapping in popup.js uses keyMap to avoid bugs:
 ```javascript
 const keyMap = {
     '433': 'block433',
-    'fokus': 'blockFokus', 
+    'fokus': 'blockFokus',
     'eyjan': 'blockEyjan',
-    'kynning': 'blockKynning',
-    'ads': 'blockAds'
+    'kynning': 'blockKynning'
 };
 ```
 

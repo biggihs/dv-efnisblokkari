@@ -1,88 +1,120 @@
-# DV Content Blocker
+# DV Efnisblokkari
 
-A Firefox extension that replaces images from specific content categories on dv.is with colored blocks to help you focus on the content you want to read.
+Firefox og Chrome viðbót til að fela óskylt efni á dv.is með litaðar blokka.
 
-## What it does
+## Um þessa viðbót
 
-This extension automatically detects and replaces content from five categories on dv.is:
-- **433 Sports** (⚽) - Replaced with green blocks (#28a745)
-- **Fókus** (🎭) - Replaced with purple blocks (#6B287F)
-- **Eyjan** (🏝️) - Replaced with red blocks (#e74c3c)
-- **Kynning** (📢) - Replaced with orange blocks (#f39c12)
-- **Advertisements** (🚫) - Replaced with white blocks with black border and scrolling "Auglýsing" text
+> "Ég hef lengi verið þreyttur á að skoða fréttir á DV og smella óvart á 433 "íþróttafréttir" eða auglýsingar. Svo ég lét Claude búa til þetta plugin fyrir Chrome og Firefox sem felur það efni sem ég hef ekki áhuga á. Ég hef ekki lesið neitt af kóðanum, hvorki þessa síðu né plugginið sjálft. ... brave new world :)"
+> 
+> — Birgir Hrafn Sigurðsson
 
-Each blocked element shows an appropriate icon and label indicating the content type that was hidden.
+**⚠️ Mikilvæg athugasemd**: Þessi viðbót var að öllu leyti búin til af Claude AI (gervigreind). Höfundurinn hefur ekki skoðað eða staðfest kóðann. Notaðu á eigin ábyrgð og traust.
 
-## Features
+## Skjáskot
 
-- **Individual Toggle Control**: Enable/disable blocking for each content type separately
-- **"Block All" Option**: Quickly turn all blocking on or off
-- **Smart Detection**: Automatically identifies content by CSS classes (`.f_433`, `.f_fokus`, `.f_eyjan`, `.f_lifsstill`) and ad elements (`.adbox`, `.adboxid`, `[data-zone*="adzone"]`)
-- **Reversible**: Turn off blocking to see original images instantly
-- **Real-time**: Works with dynamically loaded content
-- **Visual Feedback**: Different colors and icons for each content type
+<img src="./Popup%20example.png" alt="Viðbótarstjórnborð með íslenskum texta" width="400">
 
-## Installation
+*Popup viðmót með íslenskum texta og víxlum fyrir hvern efnisflokk*
 
-### For Development/Testing:
+<img src="./Screenshot%20Example.png" alt="DV síða með feldum efni" width="800">
 
-1. Open Firefox and navigate to `about:debugging`
-2. Click "This Firefox" in the left sidebar
-3. Click "Load Temporary Add-on..."
-4. Navigate to this folder and select the `manifest.json` file
-5. The extension will be loaded and active on dv.is
+*DV síða með feldum efni - litaðar blokka sýna hvað var falið*
 
-### For Permanent Installation:
+## Hvað gerir þetta?
 
-1. Zip the entire extension folder (manifest.json, content.js, styles.css)
-2. Rename the zip file to have a .xpi extension
-3. Drag and drop the .xpi file into Firefox to install
+Þessi viðbót felur sjálfkrafa efni úr fjórum flokkum á dv.is:
 
-## How it works
+- **⚽ 433 Íþróttir** - Skipt út fyrir græna blokka með "Íþróttefni falið"
+- **🎭 Fókus** - Skipt út fyrir fjólubláa blokka með "Fókus efni falið"
+- **🏝️ Eyjan** - Skipt út fyrir rauða blokka með "Eyjan efni falið"
+- **📢 Kynningar** - Skipt út fyrir appelsínugula blokka með "Kynning efni falið"
 
-The extension:
+## Eiginleikar
 
-1. **Detects content types** by looking for:
-   - **433 Sports**: Elements with `.f_433` class spans or `.enskiboltinn` class
-   - **Fókus**: Elements with `.f_fokus` class spans
-   - **Eyjan**: Elements with `.f_eyjan` class spans
-   - **Kynning**: Elements with `.f_lifsstill` class spans or `.kynning` container class
-   - **Advertisements**: Elements with `.adbox`, `.adboxid`, `.auglysing_ticker`, `[data-zone*="adzone"]` classes
+### 🎯 Snjall greining:
+- Finnur efni eftir CSS flokkum (`.f_433`, `.f_fokus`, `.f_eyjan`, `.f_lifsstill`, `.kynning`)
+- Virkar með efni sem hlaðið er seinna (MutationObserver)
 
-2. **Replaces content** based on type:
-   - **433**: Green blocks (#28a745) with "⚽ Íþróttefni falið" 
-   - **Fókus**: Purple blocks (#6B287F) with "🎭 Fókus efni falið"
-   - **Eyjan**: Red blocks (#e74c3c) with "🏝️ Eyjan efni falið"
-   - **Kynning**: Orange blocks (#f39c12) with "📢 Kynning efni falið"
-   - **Ads**: White blocks with black border and continuously scrolling "Auglýsing" text
-   - Maintains original dimensions
+### ⚙️ Auðveld stjórnun:
+- Víxlar fyrir hvern efnisflokk fyrir sig
+- "Fela allt efni" víxill fyrir allt í einu
+- Stillingar vista sjálfkrafa í vafra
+- Rauntíma uppfærsla án þess að endurnýja síðu
 
-3. **Monitors dynamic content** using MutationObserver to catch lazy-loaded images
+### 🎨 Sjónræn endurgjöf:
+- Mismunandi litir fyrir hvern efnisflokk
+- Táknmyndir og texti sýna hvað var falið
+- Viðheldur upprunalegu stærð mynda
 
-## Usage
+## Uppsetning
 
-1. **Open Controls**: Click the extension icon in Firefox toolbar
-2. **Individual Toggles**: Use separate switches for 433, Fókus, Eyjan, Kynning, and Advertisements
-3. **Block All**: Use the master toggle to enable/disable all content types at once
-4. **Status Display**: See which content types are currently being blocked
+### Firefox (60+)
+1. Sæktu [`dv-content-blocker-firefox.zip`](https://github.com/biggihs/dv-efnisblokkari/raw/main/build/dv-content-blocker-firefox.zip)
+2. Farðu í `about:debugging`
+3. Smelltu á "This Firefox"
+4. Smelltu á "Load Temporary Add-on"
+5. Veldu `manifest.json` úr ZIP skránni
 
-Images from enabled content types will be replaced with colored blocks. Disabled content shows original images.
+### Chrome/Edge
+1. Sæktu [`dv-content-blocker-chrome.zip`](https://github.com/biggihs/dv-efnisblokkari/raw/main/build/dv-content-blocker-chrome.zip)
+2. Farðu í `chrome://extensions`
+3. Kveiktu á "Developer mode"
+4. Smelltu á "Load unpacked"
+5. Veldu möppuna úr ZIP skránni
 
-## Files
+## Notkun
 
-- `manifest.json` - Extension configuration
-- `content.js` - Main content script that detects and replaces content images  
-- `styles.css` - CSS styling for the colored blocks and indicators
-- `popup.html` - Multi-toggle interface
-- `popup.js` - Popup functionality with individual controls
-- `background.js` - Extension background script for state management
-- `README.md` - This documentation
+1. **Settu upp** viðbótina í vafranum þínum
+2. **Farðu á** [www.dv.is](https://www.dv.is)
+3. **Smelltu á** viðbótartáknið í tækjastikunni
+4. **Veldu** hvaða efnisflokka þú vilt fela
+5. **Njóttu** betri upplifunar án óskylts efnis!
 
-## Compatibility
+## Tæknilegar upplýsingar
 
-- Firefox 60+ (Manifest V2)
-- Works specifically on www.dv.is
+### Stuðningur við vafra:
+- **Firefox 60+** - Manifest V2, `browser` API
+- **Chrome/Edge** - Manifest V3, `chrome` API, service worker
+- Cross-browser compatibility layer fyrir báða vafra
 
-## Privacy
+### Skrár:
+- `manifest.json` / `manifest-chrome.json` - Viðbótarstillingar
+- `content.js` - Aðalskript sem finnur og felur efni
+- `styles.css` - CSS fyrir litaða blokka
+- `popup.html` - Íslenskt viðmót með víxlum
+- `popup.js` - Virkni fyrir popup stjórnborð
+- `background.js` / `background-chrome.js` - Bakgrunnskript
+- `build.sh` - Sjálfvirkt byggingarskript
 
-This extension only runs on dv.is and does not collect or transmit any data. All processing happens locally in your browser.
+### Þróun:
+```bash
+# Búa til pakka fyrir báða vafra
+./build.sh
+
+# Outputs:
+# build/dv-content-blocker-firefox.zip (AMO tilbúið)
+# build/dv-content-blocker-chrome.zip (Chrome Web Store tilbúið)
+```
+
+## Öryggi og persónuvernd
+
+- ✅ **Engin gögn send** - Allt unnið í vafranum þínum
+- ✅ **Aðeins dv.is** - Viðbótin hefur aðeins aðgang að www.dv.is
+- ✅ **Opinn kóði** - Allur kóði aðgengilegur til skoðunar á GitHub
+- ✅ **MIT leyfi** - Frjáls til notkunar og breytinga
+
+## Stuðningur
+
+- **🌐 Vefsíða**: [https://biggihs.github.io/dv-efnisblokkari/](https://biggihs.github.io/dv-efnisblokkari/)
+- **🐛 Tilkynna villu**: [GitHub Issues](https://github.com/biggihs/dv-efnisblokkari/issues)
+- **📄 Kóði**: [GitHub Repository](https://github.com/biggihs/dv-efnisblokkari)
+
+## Leyfi
+
+MIT License - Sjá [LICENSE](LICENSE) skrá fyrir nánari upplýsingar.
+
+---
+
+**🤖 Búið til að öllu leyti með [Claude Code](https://claude.ai/code)**
+
+**⚠️ Ábyrgðaryfirlýsing**: Þessi viðbót var búin til af gervigreind. Höfundurinn hefur ekki skoðað kóðann og tekur enga ábyrgð á virkni eða öryggi. Notaðu á eigin áhættu og traust.

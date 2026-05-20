@@ -22,19 +22,17 @@ Firefox og Chrome viðbót til að fela óskylt efni á dv.is með litaðar blok
 
 ## Hvað gerir þetta?
 
-Þessi viðbót felur sjálfkrafa efni úr fimm flokkum á dv.is:
+Þessi viðbót felur sjálfkrafa efni úr fjórum flokkum á dv.is:
 
 - **⚽ 433 Íþróttir** - Skipt út fyrir græna blokka með "Íþróttefni falið"
-- **🎭 Fókus** - Skipt út fyrir fjólubláa blokka með "Fókus efni falið"  
+- **🎭 Fókus** - Skipt út fyrir fjólubláa blokka með "Fókus efni falið"
 - **🏝️ Eyjan** - Skipt út fyrir rauða blokka með "Eyjan efni falið"
 - **📢 Kynningar** - Skipt út fyrir appelsínugula blokka með "Kynning efni falið"
-- **🚫 Auglýsingar** - Skipt út fyrir hvíta blokka (enginn texti)
 
 ## Eiginleikar
 
 ### 🎯 Snjall greining:
 - Finnur efni eftir CSS flokkum (`.f_433`, `.f_fokus`, `.f_eyjan`, `.f_lifsstill`, `.kynning`)
-- Auglýsingagreining (`.adbox`, `.adboxid`, `.auglysing_ticker`, `[data-zone*="adzone"]`)
 - Virkar með efni sem hlaðið er seinna (MutationObserver)
 
 ### ⚙️ Auðveld stjórnun:

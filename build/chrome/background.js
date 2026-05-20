@@ -4,13 +4,12 @@ const browserAPI = typeof browser !== 'undefined' ? browser : chrome;
 
 async function setDefaults() {
     try {
-        const result = await browserAPI.storage.sync.get(['block433', 'blockFokus', 'blockEyjan', 'blockKynning', 'blockAds']);
+        const result = await browserAPI.storage.sync.get(['block433', 'blockFokus', 'blockEyjan', 'blockKynning']);
         const defaults = {};
         if (result.block433 === undefined) defaults.block433 = true;
         if (result.blockFokus === undefined) defaults.blockFokus = true;
         if (result.blockEyjan === undefined) defaults.blockEyjan = true;
         if (result.blockKynning === undefined) defaults.blockKynning = true;
-        if (result.blockAds === undefined) defaults.blockAds = true;
         
         if (Object.keys(defaults).length > 0) {
             await browserAPI.storage.sync.set(defaults);
@@ -33,13 +32,12 @@ browserAPI.runtime.onStartup.addListener(() => {
 browserAPI.runtime.onMessage.addListener(async (request, sender, sendResponse) => {
     if (request.action === 'getState') {
         try {
-            const result = await browserAPI.storage.sync.get(['block433', 'blockFokus', 'blockEyjan', 'blockKynning', 'blockAds']);
-            sendResponse({ 
+            const result = await browserAPI.storage.sync.get(['block433', 'blockFokus', 'blockEyjan', 'blockKynning']);
+            sendResponse({
                 block433: result.block433 !== false,
                 blockFokus: result.blockFokus !== false,
                 blockEyjan: result.blockEyjan !== false,
-                blockKynning: result.blockKynning !== false,
-                blockAds: result.blockAds !== false
+                blockKynning: result.blockKynning !== false
             });
         } catch (error) {
             console.error('Error getting state:', error);

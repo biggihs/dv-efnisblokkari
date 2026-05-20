@@ -7,22 +7,20 @@ document.addEventListener('DOMContentLoaded', async function() {
     const toggleFokus = document.getElementById('toggleFokus');
     const toggleEyjan = document.getElementById('toggleEyjan');
     const toggleKynning = document.getElementById('toggleKynning');
-    const toggleAds = document.getElementById('toggleAds');
     const toggleAll = document.getElementById('toggleAll');
     const statusText = document.getElementById('statusText');
 
     // Load current state
     try {
         // First try to get settings from storage
-        const result = await browserAPI.storage.sync.get(['block433', 'blockFokus', 'blockEyjan', 'blockKynning', 'blockAds']);
-        
+        const result = await browserAPI.storage.sync.get(['block433', 'blockFokus', 'blockEyjan', 'blockKynning']);
+
         // Create settings with defaults
         const settings = {
-            block433: result.block433 !== false, // Default to true if undefined/null
-            blockFokus: result.blockFokus !== false, // Default to true if undefined/null
-            blockEyjan: result.blockEyjan !== false, // Default to true if undefined/null
-            blockKynning: result.blockKynning !== false, // Default to true if undefined/null
-            blockAds: result.blockAds !== false // Default to true if undefined/null
+            block433: result.block433 !== false,
+            blockFokus: result.blockFokus !== false,
+            blockEyjan: result.blockEyjan !== false,
+            blockKynning: result.blockKynning !== false
         };
         
         // If storage is empty, initialize with defaults
@@ -38,8 +36,7 @@ document.addEventListener('DOMContentLoaded', async function() {
             block433: true,
             blockFokus: true,
             blockEyjan: true,
-            blockKynning: true,
-            blockAds: true
+            blockKynning: true
         };
         updateUI(defaultSettings);
         statusText.textContent = 'Notar sjálfgefnar stillingar';
@@ -62,25 +59,19 @@ document.addEventListener('DOMContentLoaded', async function() {
         handleToggleClick('kynning', toggleKynning);
     });
 
-    toggleAds.addEventListener('click', function() {
-        handleToggleClick('ads', toggleAds);
-    });
-
     // Handle "block all" toggle
     toggleAll.addEventListener('click', async function() {
-        const allEnabled = toggle433.classList.contains('active') && 
-                          toggleFokus.classList.contains('active') && 
+        const allEnabled = toggle433.classList.contains('active') &&
+                          toggleFokus.classList.contains('active') &&
                           toggleEyjan.classList.contains('active') &&
-                          toggleKynning.classList.contains('active') &&
-                          toggleAds.classList.contains('active');
+                          toggleKynning.classList.contains('active');
         const newState = !allEnabled;
-        
+
         const settings = {
             block433: newState,
             blockFokus: newState,
             blockEyjan: newState,
-            blockKynning: newState,
-            blockAds: newState
+            blockKynning: newState
         };
         
         try {
@@ -99,10 +90,9 @@ document.addEventListener('DOMContentLoaded', async function() {
         // Map content types to correct storage keys
         const keyMap = {
             '433': 'block433',
-            'fokus': 'blockFokus', 
+            'fokus': 'blockFokus',
             'eyjan': 'blockEyjan',
-            'kynning': 'blockKynning',
-            'ads': 'blockAds'
+            'kynning': 'blockKynning'
         };
         const storageKey = keyMap[contentType];
         
@@ -110,13 +100,12 @@ document.addEventListener('DOMContentLoaded', async function() {
             await browserAPI.storage.sync.set({ [storageKey]: newState });
             
             // Reload all settings to update UI
-            const result = await browserAPI.storage.sync.get(['block433', 'blockFokus', 'blockEyjan', 'blockKynning', 'blockAds']);
+            const result = await browserAPI.storage.sync.get(['block433', 'blockFokus', 'blockEyjan', 'blockKynning']);
             const settings = {
                 block433: result.block433 !== false,
                 blockFokus: result.blockFokus !== false,
                 blockEyjan: result.blockEyjan !== false,
-                blockKynning: result.blockKynning !== false,
-                blockAds: result.blockAds !== false
+                blockKynning: result.blockKynning !== false
             };
             updateUI(settings);
             notifyContentScript(settings);
@@ -146,24 +135,22 @@ document.addEventListener('DOMContentLoaded', async function() {
         updateToggle(toggleFokus, settings.blockFokus);
         updateToggle(toggleEyjan, settings.blockEyjan);
         updateToggle(toggleKynning, settings.blockKynning);
-        updateToggle(toggleAds, settings.blockAds);
-        
+
         // Update "block all" toggle
-        const allEnabled = settings.block433 && settings.blockFokus && settings.blockEyjan && settings.blockKynning && settings.blockAds;
+        const allEnabled = settings.block433 && settings.blockFokus && settings.blockEyjan && settings.blockKynning;
         updateToggle(toggleAll, allEnabled);
-        
+
         // Update status text
         const blockedTypes = [];
         if (settings.block433) blockedTypes.push('433');
         if (settings.blockFokus) blockedTypes.push('Fókus');
         if (settings.blockEyjan) blockedTypes.push('Eyjan');
         if (settings.blockKynning) blockedTypes.push('Kynningar');
-        if (settings.blockAds) blockedTypes.push('Auglýsingar');
-        
+
         if (blockedTypes.length === 0) {
             statusText.textContent = 'Allt efni sýnilegt';
             statusText.className = 'status-text status-inactive';
-        } else if (blockedTypes.length === 5) {
+        } else if (blockedTypes.length === 4) {
             statusText.textContent = 'Allar efnistegundir felaðar';
             statusText.className = 'status-text status-active';
         } else {

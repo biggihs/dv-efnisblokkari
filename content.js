@@ -12,37 +12,12 @@ console.log('DV Efnisblokkari: Viðbót hlaðin og fylgist með 433, Fókus, Eyj
         block433: true,
         blockFokus: true,
         blockEyjan: true,
-        blockKynning: true,
-        blockAds: true
+        blockKynning: true
     };
     let originalImages = new Map(); // Store original background images
 
-    // Function to check if element is an advertisement
-    function isAdElement(element) {
-        // Check for ad-related classes and attributes
-        const adClasses = ['adbox', 'adboxid', 'auglysing', 'ad_'];
-        const hasAdClass = adClasses.some(cls => 
-            element.classList.contains(cls) || 
-            element.className.includes(cls)
-        );
-        
-        // Check for ad zone data attributes
-        const hasAdZone = element.hasAttribute('data-zone') && 
-                         element.getAttribute('data-zone').includes('adzone');
-        
-        // Check if parent has ad-related classes
-        const parentHasAdClass = element.closest('.adbox, .adboxid, .auglysing_ticker, [class*="ad_"], [data-zone*="adzone"]');
-        
-        return hasAdClass || hasAdZone || parentHasAdClass;
-    }
-
     // Function to check content type and return type info
     function getContentType(element) {
-        // Check for ads first (highest priority)
-        if (isAdElement(element)) {
-            return { type: 'ads', shouldBlock: blockingSettings.blockAds };
-        }
-        
         // Check for different content types
         const has433Span = element.querySelector('.f_433');
         const hasFokusSpan = element.querySelector('.f_fokus');
@@ -110,11 +85,6 @@ console.log('DV Efnisblokkari: Viðbót hlaðin og fylgist með 433, Fókus, Eyj
                 color: '#f39c12',
                 icon: '📢',
                 label: 'Kynning efni falið'
-            },
-            'ads': {
-                color: 'white',
-                icon: '',
-                label: 'Auglýsing Auglýsing Auglýsing Auglýsing Auglýsing Auglýsing Auglýsing Auglýsing Auglýsing Auglýsing Auglýsing Auglýsing Auglýsing Auglýsing Auglýsing Auglýsing Auglýsing Auglýsing Auglýsing Auglýsing Auglýsing Auglýsing Auglýsing Auglýsing '
             }
         };
         
@@ -170,60 +140,12 @@ console.log('DV Efnisblokkari: Viðbót hlaðin og fylgist með 433, Fókus, Eyj
                 indicator.remove();
             }
             
-            // For ad elements, restore original content if it was completely replaced
-            if (element.querySelector('.ad-blocked-indicator') && element.innerHTML.includes('🚫 Auglýsing falin')) {
-                // If original display was stored, restore it
-                if (element.dataset.originalDisplay) {
-                    element.style.display = element.dataset.originalDisplay;
-                    delete element.dataset.originalDisplay;
-                }
-                if (element.dataset.originalVisibility) {
-                    element.style.visibility = element.dataset.originalVisibility;
-                    delete element.dataset.originalVisibility;
-                }
-                // Clear the replaced content
-                element.innerHTML = '';
-            }
         }
-    }
-
-    // Function to block advertisements
-    function blockAds() {
-        if (!blockingSettings.blockAds) return;
-        
-        // Find ad elements by various selectors
-        const adSelectors = [
-            '.adbox',
-            '.adboxid', 
-            '.auglysing_ticker',
-            '[data-zone*="adzone"]',
-            '[class*="ad_"]'
-        ];
-        
-        adSelectors.forEach(selector => {
-            const adElements = document.querySelectorAll(selector);
-            adElements.forEach(element => {
-                if (!originalImages.has(element)) {
-                    const originalStyle = element.getAttribute('style') || '';
-                    originalImages.set(element, originalStyle);
-                    
-                    // Store original display and visibility
-                    const computedStyle = window.getComputedStyle(element);
-                    element.dataset.originalDisplay = computedStyle.display;
-                    element.dataset.originalVisibility = computedStyle.visibility;
-                }
-                
-                // Replace with plain white block
-                element.style.backgroundColor = 'white';
-                element.style.border = 'none';
-                element.innerHTML = '';
-            });
-        });
     }
 
     // Function to process all blocked content images
     function processImages() {
-        const anyBlockingEnabled = blockingSettings.block433 || blockingSettings.blockFokus || blockingSettings.blockEyjan || blockingSettings.blockKynning || blockingSettings.blockAds;
+        const anyBlockingEnabled = blockingSettings.block433 || blockingSettings.blockFokus || blockingSettings.blockEyjan || blockingSettings.blockKynning;
         if (!anyBlockingEnabled) return;
         
         // Find all article elements and check their content type
@@ -256,9 +178,6 @@ console.log('DV Efnisblokkari: Viðbót hlaðin og fylgist með 433, Fókus, Eyj
         // Handle main featured articles with specific selectors (legacy for sports)
         const featuredSportsArticles = document.querySelectorAll('.grein.enskiboltinn figure[style*="background-image"]');
         featuredSportsArticles.forEach(figure => replaceImageWithBlock(figure, '433'));
-        
-        // Process advertisements
-        blockAds();
     }
 
     // Function to process slider content (topboxes)
@@ -325,7 +244,7 @@ console.log('DV Efnisblokkari: Viðbót hlaðin og fylgist með 433, Fókus, Eyj
         return { type: null, shouldBlock: false };
     }
 
-    // Function to restore all images and ads
+    // Function to restore all images
     function restoreAllImages() {
         originalImages.forEach((originalStyle, element) => {
             restoreOriginalImage(element);
@@ -338,8 +257,7 @@ console.log('DV Efnisblokkari: Viðbót hlaðin og fylgist með 433, Fókus, Eyj
             block433: enabled,
             blockFokus: enabled,
             blockEyjan: enabled,
-            blockKynning: enabled,
-            blockAds: enabled
+            blockKynning: enabled
         };
         
         if (enabled) {
@@ -352,27 +270,26 @@ console.log('DV Efnisblokkari: Viðbót hlaðin og fylgist með 433, Fókus, Eyj
     // Function to update settings
     function updateSettings(settings) {
         blockingSettings = settings;
-        
+
         // Restore all images first
         restoreAllImages();
-        
+
         // Then reprocess based on new settings
-        const anyEnabled = settings.block433 || settings.blockFokus || settings.blockEyjan || settings.blockKynning || settings.blockAds;
+        const anyEnabled = settings.block433 || settings.blockFokus || settings.blockEyjan || settings.blockKynning;
         if (anyEnabled) {
             processImages();
         }
     }
 
     // Load initial state from storage
-    browserAPI.storage.sync.get(['block433', 'blockFokus', 'blockEyjan', 'blockKynning', 'blockAds', 'blockerEnabled'], function(result) {
+    browserAPI.storage.sync.get(['block433', 'blockFokus', 'blockEyjan', 'blockKynning', 'blockerEnabled'], function(result) {
         // Handle both new and legacy storage formats
-        if (result && (result.block433 !== undefined || result.blockFokus !== undefined || result.blockEyjan !== undefined || result.blockKynning !== undefined || result.blockAds !== undefined)) {
+        if (result && (result.block433 !== undefined || result.blockFokus !== undefined || result.blockEyjan !== undefined || result.blockKynning !== undefined)) {
             blockingSettings = {
                 block433: result.block433 !== false,
                 blockFokus: result.blockFokus !== false,
                 blockEyjan: result.blockEyjan !== false,
-                blockKynning: result.blockKynning !== false,
-                blockAds: result.blockAds !== false
+                blockKynning: result.blockKynning !== false
             };
         } else if (result && result.blockerEnabled !== undefined) {
             // Legacy format - convert to new format
@@ -381,8 +298,7 @@ console.log('DV Efnisblokkari: Viðbót hlaðin og fylgist með 433, Fókus, Eyj
                 block433: legacyEnabled,
                 blockFokus: legacyEnabled,
                 blockEyjan: legacyEnabled,
-                blockKynning: legacyEnabled,
-                blockAds: legacyEnabled
+                blockKynning: legacyEnabled
             };
         } else {
             // No settings found, use defaults
@@ -390,12 +306,11 @@ console.log('DV Efnisblokkari: Viðbót hlaðin og fylgist með 433, Fókus, Eyj
                 block433: true,
                 blockFokus: true,
                 blockEyjan: true,
-                blockKynning: true,
-                blockAds: true
+                blockKynning: true
             };
         }
-        
-        const anyEnabled = blockingSettings.block433 || blockingSettings.blockFokus || blockingSettings.blockEyjan || blockingSettings.blockKynning || blockingSettings.blockAds;
+
+        const anyEnabled = blockingSettings.block433 || blockingSettings.blockFokus || blockingSettings.blockEyjan || blockingSettings.blockKynning;
         if (anyEnabled) {
             processImages();
         }
@@ -412,7 +327,7 @@ console.log('DV Efnisblokkari: Viðbót hlaðin og fylgist með 433, Fókus, Eyj
 
     // Set up mutation observer for dynamically loaded content
     const observer = new MutationObserver(function(mutations) {
-        const anyBlockingEnabled = blockingSettings.block433 || blockingSettings.blockFokus || blockingSettings.blockEyjan || blockingSettings.blockKynning || blockingSettings.blockAds;
+        const anyBlockingEnabled = blockingSettings.block433 || blockingSettings.blockFokus || blockingSettings.blockEyjan || blockingSettings.blockKynning;
         if (!anyBlockingEnabled) return;
         
         mutations.forEach(function(mutation) {
@@ -471,7 +386,7 @@ console.log('DV Efnisblokkari: Viðbót hlaðin og fylgist með 433, Fókus, Eyj
     }
     
     window.addEventListener('load', function() {
-        const anyEnabled = blockingSettings.block433 || blockingSettings.blockFokus || blockingSettings.blockEyjan || blockingSettings.blockKynning || blockingSettings.blockAds;
+        const anyEnabled = blockingSettings.block433 || blockingSettings.blockFokus || blockingSettings.blockEyjan || blockingSettings.blockKynning;
         if (anyEnabled) processImages();
     });
 
